@@ -1,10 +1,16 @@
+#![allow(warnings)]
+#[allow(non_snake_case)]
+
+
 use std::io;
+
 enum Menu
 {
     AddressInput(u8),
     AddressSearch(u8),
 }
 
+#[derive(Debug, Eq, Ord, PartialEq, PartialOrd)]
 pub struct HumanAddressData
 {
     UserName : String,
@@ -15,15 +21,10 @@ impl HumanAddressData
 {
     pub fn ShowInfomation(&self)
     {
-        println!("Infomation : {} , {}",self.UserName,self.Address);
+        println!("addressInfo : [{:3}] / [{}]",self.UserName,self.Address);
     }
 }
 
-pub fn showMenu()
-{
-    println!("1. 주소 입력");
-    println!("2. 주소 검색");
-}
 
 pub struct HumanAddressInfomation
 {
@@ -45,7 +46,8 @@ impl HumanAddressInfomation
     {
         if self.InfomationDatas.len() % 3  == 0
         {
-            //self.InfomationDatas.sort_by_key(|sorce| sorce.UserName.get(0..1) );
+            //self.InfomationDatas.sort_by(|first, next|  );
+            self.InfomationDatas.sort();
         }
     }
 
@@ -54,13 +56,26 @@ impl HumanAddressInfomation
         true
     }
 
+    pub fn showAllData(&self)
+    {
+        for data in self.InfomationDatas.iter()
+        {
+            data.ShowInfomation();
+        }
+    }
+
 }
 
-
+use HumanAddressInfomation as AddressInfoSys;
 fn main() {
 
-    let mut addressInfomationSystem = HumanAddressInfomation{ InfomationDatas: Vec::new() };
+    let mut addressInfoSys = AddressInfoSys{ InfomationDatas: Vec::new() };
 
-    addressInfomationSystem.add(String::from("현준"),String::from("서울 특별시"));
+    addressInfoSys.add(String::from("현준"),String::from("가시덤불골짜기"));
+    addressInfoSys.add(String::from("동훈"),String::from("오그리마"));
+    addressInfoSys.add(String::from("재민"),String::from("불모의땅"));
+    addressInfoSys.add(String::from("용곤"),String::from("스톰윈드"));
+
+    addressInfoSys.showAllData();
 
 }
