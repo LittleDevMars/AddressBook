@@ -17,6 +17,7 @@ pub struct HumanAddressData
     Address : String,
 }
 
+
 impl HumanAddressData
 {
     pub fn ShowInfomation(&self)
@@ -25,22 +26,30 @@ impl HumanAddressData
     }
 }
 
-
 pub struct HumanAddressInfomation
 {
     InfomationDatas : Vec<HumanAddressData>,
 }
 
+
 impl HumanAddressInfomation
 {
-    pub fn add(&mut self, name : String, address : String)
+    pub fn addString(&mut self, name : String, address : String)
     {
         let data = HumanAddressData{ UserName: name, Address: address };
 
         self.InfomationDatas.push(data);
         
+    }
+
+    pub fn addTuple(&mut self, tuple : (&str,&str))
+    {
+        let data = HumanAddressData{ UserName: tuple.0.to_string(), Address: tuple.1.to_string() };
+
+        self.InfomationDatas.push(data);
         
     }
+
 
     pub fn sort(&mut self)
     {
@@ -66,16 +75,27 @@ impl HumanAddressInfomation
 
 }
 
+
 use HumanAddressInfomation as AddressInfoSys;
+
+
 fn main() {
+
+    let mut name = String::new();
+    
+    name = String::from("남현준");
+    println!("{:?}",name.chars().next().unwrap());
+    println!("{:?}",name.into_bytes().get(0..1).unwrap());
 
     let mut addressInfoSys = AddressInfoSys{ InfomationDatas: Vec::new() };
 
-    addressInfoSys.add(String::from("현준"),String::from("가시덤불골짜기"));
-    addressInfoSys.add(String::from("동훈"),String::from("오그리마"));
-    addressInfoSys.add(String::from("재민"),String::from("불모의땅"));
-    addressInfoSys.add(String::from("용곤"),String::from("스톰윈드"));
+    addressInfoSys.addTuple(("현준","가시덤불골짜기"));
+    addressInfoSys.addTuple(("동훈","오그리마"));
+    addressInfoSys.addTuple(("재민","불모의땅"));
+    addressInfoSys.addTuple(("용곤","스톰윈드"));
+    
 
-    addressInfoSys.showAllData();
+   addressInfoSys.showAllData();
 
 }
+
