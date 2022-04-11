@@ -3,6 +3,7 @@
 
 
 use std::io;
+use std::fmt;
 
 enum Menu
 {
@@ -75,17 +76,19 @@ impl HumanAddressInfomation
 
 }
 
-
-use HumanAddressInfomation as AddressInfoSys;
-
-
-fn main() {
-
+fn Testcode()
+{
     let mut name = String::new();
     
     name = String::from("남현준");
     println!("{:?}",name.chars().next().unwrap());
     println!("{:?}",name.into_bytes().get(0..1).unwrap());
+
+}
+
+use HumanAddressInfomation as AddressInfoSys;
+
+fn main() {
 
     let mut addressInfoSys = AddressInfoSys{ InfomationDatas: Vec::new() };
 
